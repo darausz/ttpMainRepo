@@ -1,0 +1,112 @@
+/* body {
+    font-size: 20px;
+    color: red;
+}
+
+p {
+    color:coral;
+}
+
+h1, h2, h3 {
+    color:chartreuse;
+} */
+
+/* class selector */
+/* h1 {
+    font-size:50px;
+}
+
+.movies {
+    color:aqua;
+}
+
+.shows-title {
+    color:pink;
+} */
+
+/* ID selector */
+/* #recipt-title {
+    text-transform: uppercase;
+}
+
+#desserts {
+    text-align: center;
+} */
+
+/* universal selector selects all elements */
+/* * {
+    text-align: center;
+    font-family: monospace;
+}
+
+li {
+    color:blueviolet;
+}
+
+.languages {
+    text-transform: uppercase;
+} */
+
+/* colors */
+/* body {
+    font-size: 24px;
+    font-family: monospace;
+    line-height: 1.8;
+    background-color: brown;
+    color:rgb(0, 0, 0);
+}
+
+p {
+    color:rgba(0, 0, 0, 0.5); 
+}
+
+h1 {
+    color: #EE4B2B;
+} */
+
+/* units & size */
+/* h1 {
+    rem - adjustable to browser changes
+    1rem = 16px;
+    2rem = 32px;
+    3rem = 48px; 
+    font-size: 2rem;
+} */
+
+/* box model */
+/* * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.container{
+    border: 2px solid red;
+    border-bottom: 2px dotted pink;
+    font-size: 1.5rem;
+}   */
+
+/* typography */
+
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-size: 2rem;
+    font-family: "Times New Roman";
+}
+
+main {
+    text-decoration: underline;
+    text-transform: uppercase;
+    text-align: left;
+    text-indent: 2.5rem;
+    line-height: 1.5;
+    word-spacing: .8rem;
+    color: red;
+    font-weight: 600;
+    font-style: italic;
+}
