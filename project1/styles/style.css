@@ -1,0 +1,95 @@
+* {
+    font-size: 1rem;
+    font-family: monospace;
+    background-color: rgb(41, 41, 41);
+    color: white;
+    border: none;
+    margin: 0;
+}
+
+nav {
+    background-color: blueviolet;
+}
+
+nav * {
+    padding-top: .7rem;
+    padding-bottom: .7rem;
+    text-decoration: none;
+    font-size: 2rem;
+    background-color: blueviolet;
+}
+
+h1 {
+    font-size: 3rem;
+    text-align: center;
+    margin-top: 10rem;
+    padding-bottom: 5rem;
+}
+
+footer * {
+    text-decoration: none;
+    text-align: center;
+    margin-bottom: none;
+    font-size: 1.2rem;
+    padding: 1rem;
+}
+
+footer{
+    padding-top: 10rem;
+    margin-bottom: 3rem;
+}
+
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
+    margin-top: 0;
+    flex-wrap: wrap;
+}
+
+.container img {
+    height: 18rem;
+    width: 18rem;
+    margin: none;
+}
+
+.container audio {
+    width: 18rem;
+}
+
+.itemH {
+    display:flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    font-size: 1rem;
+    height: 20rem;
+    width: 20rem;
+    margin:2rem;
+    padding: 1.5rem;
+    text-align: left;
+    justify-items: center;
+}
+
+.item {
+    height: 23rem;
+    width: 18rem;
+    margin: 2rem;
+    padding: 3rem;
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
+    text-align: center;
+    justify-items: center;
+    background-color: rgb(52, 250, 184);
+    padding-top: .7rem;
+    font-size: 1.5rem;
+}
+
+.item * {
+    display: block;
+    background-color: rgb(52, 250, 184);
+    color: rgb(253, 96, 123);
+    padding-top: .5rem;
+    padding-bottom: .5rem;
+    font-size: 1.3rem;
+}

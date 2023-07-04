@@ -87,8 +87,7 @@ h1 {
 }   */
 
 /* typography */
-
-* {
+/* * {
     padding: 0;
     margin: 0;
     box-sizing: border-box;
@@ -109,4 +108,291 @@ main {
     color: red;
     font-weight: 600;
     font-style: italic;
+} */
+
+/* links */
+/* a {
+    text-decoration: none;
+    cursor: crosshair;
+}
+
+a:visited {
+    color: red;
+}
+
+a:hover {
+    color:green;
+}
+
+a:active {
+    color: blue;
+} */
+
+/* lists */
+/* ol {
+    list-style-type: upper-roman;
+}
+
+ul {
+    list-style-type: square;
+    text-align: center;
+    list-style-position: inside;
+    color: red;
+    list-style-image: ;
+}
+
+ul li {
+    color: green;
+}
+
+ul li:nth-child(2) {
+    color: red;
+}
+
+ul li:nth-child(3) {
+    color:blue;
+}
+
+ul ::marker {
+    color:purple;
+    content: "10% off ";
+} */
+
+/* display */
+/* * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 2rem;
+    font-family: monospace;
+}
+
+ul {
+    list-style-type: none;
+    padding: .5rem;
+    text-align: center;
+    background-color: black;
+}
+
+a {
+    text-decoration: none;
+    color: white;
+}
+
+a:hover {
+    color: blue;
+    background-color: red;
+}
+
+li {
+    display:inline-block;
+} */
+
+/* columns */
+/* body {
+    font-size: 2rem;
+    font-family: monospace;
+}
+
+.columns {
+    column-count: 4;
+    column-width: 250px;
+    column-rule: .3rem solid black;
+    column-gap: 10rem;
+}
+
+.columns p {
+    margin-top: 0;
+}
+
+.columns .quote {
+    margin-top: 2rem;
+    font-size: 3rem;
+    text-align: center;
+    column-span: all;
+}
+
+.nowrap {
+    white-space: nowrap;
+} */
+
+/* position */
+/* * {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-size: 2rem;
+    font-family: monospace;
+}
+
+.outer-container {
+    border: 3px solid red;
+    width: 900px;
+    height: 500px;
+    margin:90px
+}
+
+.inner-container {
+    border: 3px solid blue;
+    width: 700px;
+    height: 200;
+    margin: 100px
+}
+
+.box {
+    width: 150;
+    height: 150;
+    color: green;
+    padding: 1rem;
+}
+
+.absolute {
+    background-color: purple;
+    position:absolute;
+    top:100px;
+    right:50px;
+} */
+
+/* flexbox */
+/* .item {
+    margin: 10px;
+    padding: 20px;
+    background-color: darkblue;
+    color: white;
+    height: 300px;
+    width: 300px;
+}
+
+.container {
+    display: flex;
+    /* flex-direction: row;
+    flex-direction: row-reverse;
+    flex-direction: column;
+    flex-direction: column-reverse; 
+    flex-wrap: nowrap;
+    /* justify-content: flex-start flex-end space-between space-around space-evenly 
+    align-items:center;
+}
+
+.item1 {
+    /* flex-grow: 2; 
+    flex-basis: 100px;
+}
+
+.item2 {
+    flex-basis: 200px;
+} */ 
+
+/* animation */
+/* .container {
+    display:flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.animation {
+    width: 200px;
+    height: 200px;
+    margin: 20x;
+    padding: 20px;
+    background-color: magenta;
+    color:white;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-weight: bold;
+    text-align: center;
+    transition: height 2s, width 2s, background-color 2s;
+}
+
+.animation:hover {
+    height: 400px;
+    width: 400px;
+    background-color: lightpink;
+}
+
+.keyframe-animation {
+    width: 200px;
+    height: 200px;
+    margin: 50px;
+    padding: 20px;
+    background-color: darkblue;
+    color:white;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-weight: bold;
+    text-align: center;
+    animation-name: spin;
+    animation-duration: 4s;
+    animation-iteration-count:infinite;
+    animation-timing-function: linear;
+    animation-delay: 1s;
+    animation-play-state: running;
+}
+
+@keyframes spin {
+    from {
+        transform:rotate(0deg)
+    }
+    to {
+        transform: rotate(360deg);
+    }
+} */
+
+/* responsive design */
+header {
+    background-color: white;
+    padding: 20px;
+    text-align: center;
+}
+
+section p {
+    color: blue;
+    text-align: center;
+    padding: 20px;
+}
+
+@media (min-width: 600px) {
+    body {
+        background-color: white;;
+    }
+    section p {
+        color: green;
+    }
+}
+
+@media (min-width: 900px) {
+    body {
+        background-color: white;;
+    }
+    section p {
+        color: red;
+    }
+}
+
+@media screen and (min-width: 1200px) {
+    header {
+        border-bottom: 2px solid gray;
+    }
+}
+
+@media (orientation: landscape) {
+    header {
+        background-color: orange;
+    }
+}
+
+@media(aspect-ratio:16/9) {
+    body {
+        line-height: 15;
+    }
+}
+
+@media (hover: hover) {
+    section p {
+        text-decoration: underline;
+    }
 }
