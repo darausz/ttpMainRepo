@@ -58,7 +58,7 @@ footer{
     width: 18rem;
 }
 
-.itemH {
+.containerH {
     display:flex;
     flex-direction: column;
     justify-content: space-evenly;
@@ -75,7 +75,7 @@ footer{
     height: 23rem;
     width: 18rem;
     margin: 2rem;
-    padding: 3rem;
+    padding: 4rem;
     padding-left: 1.5rem;
     padding-right: 1.5rem;
     text-align: center;
