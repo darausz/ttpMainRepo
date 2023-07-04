@@ -31,7 +31,7 @@ footer * {
     text-align: center;
     margin-bottom: none;
     font-size: 1.2rem;
-    padding: 1rem;
+    padding-top: 1rem;
 }
 
 footer{
@@ -80,7 +80,7 @@ footer{
     padding-right: 1.5rem;
     text-align: center;
     justify-items: center;
-    background-color: rgb(52, 250, 184);
+    background-color: rgb(49, 255, 186);
     padding-top: .7rem;
     font-size: 1.5rem;
 }
