@@ -1,0 +1,19 @@
+.newClass {
+    color: purple;
+    font-size: 2rem;
+}
+
+.myClass3 {
+    background-color: aquamarine;
+}
+
+.active {
+    background-color: green;
+    color: white;
+}
+
+.box {
+    height: 100px;
+    width: 100px;
+    background-color: red;
+}
