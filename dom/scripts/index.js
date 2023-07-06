@@ -122,7 +122,7 @@ const div = document.createElement("div");
 div.classList.add("box");
 document.getElementById("container1").appendChild(div);
 
-//
+//remove all children
 function removeMultipleChildElements() {
     const container = document.getElementById("container2");
     const paragraphs = container.querySelectorAll("p");
@@ -131,3 +131,90 @@ function removeMultipleChildElements() {
     })
 }
 removeMultipleChildElements();
+
+//event listener
+//mouse click
+const button1 = document.getElementById("click-me");
+button1.addEventListener("click", function() {
+    console.log("button clicked")
+})
+
+const buttonCount = document.getElementById("count-me");
+let clickCount = 0;
+buttonCount.addEventListener("click", () => {
+    clickCount++;
+    console.log(`this button has been clicked ${clickCount} times`);
+})
+
+//mouseover
+const hover = document.getElementById("hover-me");
+hover.addEventListener("mouseover", () => {
+    console.log("the mouse moved over this element");
+})
+
+//mouseout
+document.addEventListener("mouseout", () => {
+    console.log("mouse moved away from this element");
+})
+
+//key down
+document.addEventListener("keydown",(event) => {
+    console.log(`I just pressed the ${event.key} key`);
+})
+
+//key up
+document.addEventListener("keyup", (event) => {
+    console.log(`I released the ${event.key} key`);
+})
+
+//getting input
+let string = "";
+document.addEventListener("keydown", (event) => {
+    string += event.key;
+    console.log(string);
+})
+
+const form = document.getElementById("form");
+let submitCount = 0;
+
+form.addEventListener("submit", (event) => {
+    event.preventDefault();
+})
+
+//parent and child
+const container3 = document.getElementById("container3");
+let children = container3.childNodes;
+console.log(children);
+
+let firstChild = container3.firstChild;
+console.log(firstChild);
+
+let lastChild = container3.lastChild;
+console.log(lastChild);
+
+//setTimeout and setInterval
+function hello() {
+    console.log("hello world")
+}
+
+setTimeout(hello, 1000);
+
+setInterval(hello, 2000);
+
+const textElement = document.getElementById("myText");
+const textButton = document.getElementById("changeText");
+textButton.addEventListener("click", () => {
+    setTimeout(() => {
+        textElement.textContent = "text changed";
+    }, 2000);
+})
+
+const divElement = document.getElementById("myDiv");
+let colors = ["red", "purple", "blue"];
+let count = 0;
+
+setInterval(() => {
+    divElement.style.backgroundColor = colors[count % colors.legnth];
+    count++
+}, 2000);
+
