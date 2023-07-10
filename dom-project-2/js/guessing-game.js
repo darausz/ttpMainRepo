@@ -80,8 +80,14 @@ function Game() {
         newGame.winningNumber = generateWinningNumber();
         return newGame;
     }
+    game.provideHint = function () {
+        let arr = [winningNumber, Math.random() * 100 + 1, Math.random() * 100 + 1];
+        return arr;
+    }
     return game;
 }
+    
+    
 
 let game = new Game();
 
@@ -92,18 +98,24 @@ guessButton.addEventListener("click", function() {
     let p = document.querySelector("p");
     p.textContent = game.playersGuessSubmission(parseInt(input.value));
     game.pastGuesses.forEach(guess => console.log(guess));
-    let box = document.querySelector(`#b${game.pastGuesses.length}`);
+    let box = document.querySelector(`.b${game.pastGuesses.length}`);
     box.textContent = game.playersGuess;
 });
 
-let newGame = document.querySelector(".newGame");
-newGame.addEventListener("click", function () {
+let newGameButton = document.querySelector(".newGame");
+newGameButton.addEventListener("click", function () {
     game = game.newGame();
-    let boxes = document.querySelectorAll("div div div");
+    let boxes = document.querySelectorAll(".box");
     console.log(boxes);
     boxes.forEach(function(box) {
         box.textContent = "";
     })
     let p = document.querySelector("p");
     p.textContent = "";
+})
+
+let hintButton = document.querySelector(".hint");
+hintButton.addEventListener("click", function() {
+    let i = 0;
+    
 })
