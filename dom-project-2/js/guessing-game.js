@@ -11,19 +11,19 @@ function generateWinningNumber() {
     return randomNum;
 }
 
-function shuffle(arr) {
-    for(let i = arr.length - 1; i > 0; i--) {
-        let random = Math.random() * i;
-        let temp = arr[i];
-        arr[i] = arr[random];
-        arr[random] = arr[temp];
+function shuffle(nums) {
+    for(let i = nums.length - 1; i > 0; i--) {
+        let random = Math.floor(Math.random() * i);
+        let temp = nums[i];
+        nums[i] = nums[random];
+        nums[random] = temp;
     }
-    return arr;
+    return nums;
 }
 function Game() {
     let game = Object.create(Game);
     game.playersGuess = null;
-    game.pastGuesses = [];
+    game.pastGuesses = new Array();
     game.winningNumber = generateWinningNumber();
     game.difference = function() {
         if (game.playersGuess > game.winningNumber) {
@@ -38,20 +38,21 @@ function Game() {
         return false;
     }
     game.checkGuess = function () {
-        if (game.playersGuess in game.pastGuesses){
-            return ("You have already guessed that number.");
-        }
-        if (!(game.playersGuess in game.pastGuesses)) {
-            game.pastGuesses.push(game.playersGuess);
-        }
-
+        console.log(game.pastGuesses);
         if (game.playersGuess === game.winningNumber) {
+            game.pastGuesses.push(game.playersGuess);
             return ("You Win!");
         }
         else {
-            if (game.pastGuesses.length === 5) {
-                return("You Lose.");
+            for (let i = 0; i < game.pastGuesses.length; i++) {
+                if (game.playersGuess == game.pastGuesses[i]) {
+                    return ("You have already guessed that number.");
+                } 
             }
+            game.pastGuesses.push(game.playersGuess);
+            if (game.pastGuesses.length === 5) {
+                return("You Lose."); 
+            }       
         }
         if (game.difference() < 10) {
             return("You're burning up!")
@@ -71,7 +72,9 @@ function Game() {
             throw Error("That is an invalid guess.");
         }
         game.playersGuess = parseInt(num);
-        return game.checkGuess();
+        console.log(game.playersGuess);
+        let output = game.checkGuess();
+        return output;
     }
     game.newGame = function () {
         let newGame = new Game;
@@ -81,12 +84,14 @@ function Game() {
         return newGame;
     }
     game.provideHint = function () {
-        let arr = [winningNumber, Math.random() * 100 + 1, Math.random() * 100 + 1];
-        return arr;
+        let num1 = generateWinningNumber();
+        let num2 = generateWinningNumber();
+        let nums = [game.winningNumber, num1, num2];
+        shuffle(nums);
+        return nums;
     }
     return game;
 }
-    
     
 
 let game = new Game();
@@ -94,19 +99,26 @@ let game = new Game();
 let guessButton = document.querySelector(".guess");
 guessButton.addEventListener("click", function() {
     let input = document.querySelector("input");
-    console.log(parseInt(input.value));
     let p = document.querySelector("p");
     p.textContent = game.playersGuessSubmission(parseInt(input.value));
     game.pastGuesses.forEach(guess => console.log(guess));
     let box = document.querySelector(`.b${game.pastGuesses.length}`);
     box.textContent = game.playersGuess;
+
+    if (p.textContent === "You Lose.") {
+        game = game.newGame();
+        let boxes = document.querySelectorAll(".box");
+        boxes.forEach(function(box) {
+            box.textContent = "";
+        })
+    }
+
 });
 
 let newGameButton = document.querySelector(".newGame");
 newGameButton.addEventListener("click", function () {
     game = game.newGame();
     let boxes = document.querySelectorAll(".box");
-    console.log(boxes);
     boxes.forEach(function(box) {
         box.textContent = "";
     })
@@ -117,5 +129,11 @@ newGameButton.addEventListener("click", function () {
 let hintButton = document.querySelector(".hint");
 hintButton.addEventListener("click", function() {
     let i = 0;
-    
-})
+    let boxes = document.querySelectorAll(".hintBox");
+    let hint = game.provideHint();
+    boxes.forEach(function(box) {
+        box.textContent = hint[i];
+        i++;
+    });
+    hintButton.disabled = true;
+});

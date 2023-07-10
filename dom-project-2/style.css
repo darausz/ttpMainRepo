@@ -1,4 +1,7 @@
 /* Write your CSS code in this file */
+body {
+    background-color: blanchedalmond;
+}
 .game {
     display: flex;
     flex-direction: column;
@@ -13,6 +16,15 @@
     height:5rem;
     width:5rem;
     background-color: aquamarine;
+    border: .15rem solid black;
+    text-align: center;
+    font-size: 2rem;
+    margin: auto;
+}
+.hintBox {
+    height:4rem;
+    width:4rem;
+    background-color: red;
     border: .15rem solid black;
     text-align: center;
     font-size: 2rem;
