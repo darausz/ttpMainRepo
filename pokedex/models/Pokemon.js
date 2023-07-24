@@ -1,7 +1,7 @@
 const { Sequelize, DataTypes } = require("sequelize");
 const db = require("../db");
 
-const Pokemon = db.define("pokemon", {
+const Pokemon = db.define("Pokemon", {
     name: {
         type: DataTypes.STRING,
         allowNull: false,
@@ -24,8 +24,9 @@ const Pokemon = db.define("pokemon", {
     },
 })
 
-const Trainer = require("./Pokemon");
+module.exports = Pokemon;
+
+const Trainer = require("./Trainer");
 Pokemon.belongsTo(Trainer);
 
-module.exports = Pokemon;
 
