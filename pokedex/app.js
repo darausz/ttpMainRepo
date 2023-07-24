@@ -8,10 +8,20 @@ const db = require("./db");
 
 const app = express();
 
+
 app.use(morgan("dev"));
 app.use(express.static(__dirname + "/public"));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
+
+(async () => {
+  try {
+    await db.sync();
+    console.log("Models synced with database");
+  } catch (error) {
+    console.error(error);
+  }
+})();
 
 app.get("/", (req, res) => {
   const pokemon = pokeBank.list();
