@@ -12,4 +12,55 @@ router.get("/pokemon", async (req, res, next) => {
     }
 })
 
+router.get("/pokemon/:id", async (req, res, next) => {
+    try {
+        const singlePokemon = await pokemon.findByPk(req.params.id);
+        res.send(singlePokemon);
+    }
+    catch (error) {
+        next(error);
+    }
+})
+
+router.post("/pokemon/:id", async (req, res, next) => {
+    try {
+        if (pokemon.findByPk(req.params.id)) {
+            const newPokemon = await pokemon.create(req.body);
+            res.send(newPokemon);
+    }}
+    catch(error) {
+        next(error);
+    }
+})
+
+router.delete("/pokemond/:id", async (req, res, next) => {
+    try {
+        if (pokemon.findByPk(req.params.id)) {
+            const toBeDeleted = await pokemon.findByPk(req.params.id);
+            await pokemon.destroy(toBeDeleted);
+        }
+    }
+    catch (error) {
+        next(error);
+    }
+})
+
+// router.update("/pokemon/:id", async (req, res, next) => {
+//     try {
+//         if (pokemon.findByPk(req.params.id)) {
+//             pokemon.update(
+//                 {name: req.body.name}, 
+//                 {type: req.body.type},
+//                 {trainer: req.body.trainer},
+//                 {date: req.body.date},
+//                 {imageURL: req.body.imageURL},
+//                 {where: {id: req.params.id}});
+//         }
+//     }
+//     catch (error) {
+//         next(error);
+//     }
+// })
+
+
 module.exports = router;
