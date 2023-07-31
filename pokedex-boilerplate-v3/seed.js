@@ -27,8 +27,15 @@ const seed = async () => {
     id:1,
     firstName: "Ash",
     lastName: "Ketchum",
-    team: 1,
+    team: "none",
     imageURL: "https://static.giga.de/wp-content/uploads/2018/01/Ash_Pok%C3%A9mon-Quiz-rcm1200x1200u.png"
+  })
+  await trainer.create({
+    id:2,
+    firstName: "Misty",
+    lastName: "Williams",
+    team: "none",
+    imageURL: "https://images2-mega.cdn.mdstrm.com/etcetera/2017/09/13/4425_2_59b988c2e5d65.jpg?d=500x500"
   })
   db.close();
   console.log(`

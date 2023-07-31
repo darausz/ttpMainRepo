@@ -1,15 +1,19 @@
 import React, {useState, useEffect} from "react";
 import axios from "axios";
+import ShowAllPokemon from "./components/ShowAllPokemon.jsx";
+import ShowAllTrainers from "./components/ShowAllTrainers.jsx";
+import ShowSinglePokemon from "./components/ShowSinglePokemon.jsx";
+import ShowSingleTrainer from "./components/ShowSingleTrainer.jsx";
 
 
 const Main = () => {
 
   const [pokemon, setPokemon] = useState([]);
-  const [pokemonId, setPokemonId] = useState("");
+  const [pokemonId, setPokemonId] = useState(0);
   const [trainer, setTrainer] = useState([]);
+  const [trainerId, setTrainerId] = useState(0);
   const [showAll, setShowAll] = useState(true);
   const [showPokemon, setShowPokemon] = useState((true));
-  const [text, setText] = useState("");
 
   useEffect(() => {
     async function fetchPokemon() {
@@ -26,57 +30,28 @@ const Main = () => {
     fetchTrainer();
   }, [])
 
-  async function fetchSinglePokemon(id) {
-    const {data} = await axios.get(`/api/pokemon/${id}`);
-    console.log("d", data);
-    setPokemon(data);
-    };
+  function handleClick(id) {
+    if (showPokemon) {
+      setPokemonId(id);
+      setShowAll(false);
+      trainer.map((person) => {
+        if (person.firstName === pokemon.trainer) {
+          setTrainerId(person.id);
+        }
+      })
+    }
+    else {
+      setTrainerId(id);
+      setShowAll(false);
+    }
+  }
   async function handlePokemonClick() {
     setShowPokemon(true);
-    setText(pokemon.map((singlePokemon) => {
-      return(
-        <div key={singlePokemon.id} className="pokemonClass">
-          <div className="pokemonName" onClick={() => showIndividualPokemon(singlePokemon.id)}>{singlePokemon.name}</div>
-          <p>Type: {singlePokemon.type}</p>
-          <img src={singlePokemon.imageURL}></img>
-          <p>Time Caught: {singlePokemon.date}</p>
-          <p>Trained By: {singlePokemon.trainer}</p>
-        </div>
-      )
-    }));
+    setShowAll(true);
   }
   async function handleTrainerClick() {
     setShowPokemon(false);
-    setText(trainer.map((person) => {
-      return(
-        <div key={person.id} className="pokemonClass">
-          <div className="trainerName" onClick={() => showIndividualTrainer(person.id)}>{person.firstName} {person.lastName}</div>
-          <p>Team: {person.team}</p>
-          <img src={person.imageURL}></img>
-        </div>
-      )
-    }));
-  }
-  function showIndividualPokemon(id) {
-    // fetchSinglePokemon(id);
-    // console.log(pokemon);
-    setText(<div>
-      <div key={pokemon[id-1].id} className="pokemonClass">
-          <div className="pokemonName" onClick={() => showIndividualPokemon(pokemon[id-1].id)}>{pokemon[id-1].name}</div>
-          <p>Type: {pokemon[id-1].type}</p>
-          <img src={pokemon[id-1].imageURL}></img>
-          <p>Time Caught: {pokemon[id-1].date}</p>
-        </div> 
-      {trainer.map((person) => {
-        if (pokemon[id-1].trainer === person.firstName) {
-          return(<div key={person.id} className="pokemonClass">
-          <div className="trainerName" onClick={() => showIndividualTrainer(person.id)}>Trained By: {person.firstName} {person.lastName}</div>
-          <p>Team: {person.team}</p>
-          <img src={person.imageURL}></img>
-        </div>);
-        }
-      })}</div>);
-    setShowAll(false);
+    setShowAll(true);
   }
   function showIndividualTrainer(id) {
     // fetchSingleTrainer(id);
@@ -101,15 +76,63 @@ const Main = () => {
     })}</div>)
     // );
   }
-  
+  function handleGoBackClick(event) {
+    event.preventDefault();
+    setShowAll(true);
+  }
+  function logic ()  {
+    if (showPokemon) {
+      if (showAll) {
+        return (
+        <ShowAllPokemon 
+          handleClick={handleClick} 
+          setShowPokemon={setShowPokemon}
+        />);
+      }
+      else {
+        return (
+        <ShowSinglePokemon 
+          pokemonId={pokemonId}
+          setShowAll={setShowAll} 
+          handleClick={handleClick}
+          handleGoBackClick={handleGoBackClick}
+          setShowPokemon={setShowPokemon}
+        />);
+      }
+    }
+    else {
+      if (showAll) {
+        return (
+        <ShowAllTrainers 
+          handleClick={handleClick} 
+          setShowPokemon={setShowPokemon}
+        />)
+      }
+      else {
+        return (
+        <ShowSingleTrainer 
+          trainerId={trainerId} 
+          setShowAll={setShowAll} 
+          handleClick={handleClick}
+          handleGoBackClick={handleGoBackClick}
+          setShowPokemon={setShowPokemon}
+        />);
+      }
+    }
+  }
   return (
     <div id="main">
       <h1>Pokedex</h1>
-      <button onClick={handlePokemonClick}>Pokemon</button>
-      <button onClick={handleTrainerClick}>Trainers</button>
-      <div>{text}</div>
+      <div className="buttons">
+        <button onClick={handlePokemonClick}>Pokemon</button>
+        <button onClick={handleTrainerClick}>Trainers</button>
+      </div>
+      <div>
+        {logic()}
+      </div>
     </div>
   );
+
 };
 
 export default Main;
