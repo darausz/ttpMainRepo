@@ -33,7 +33,7 @@ router.post("/pokemon/:id", async (req, res, next) => {
     }
 })
 
-router.delete("/pokemond/:id", async (req, res, next) => {
+router.delete("/pokemon/:id", async (req, res, next) => {
     try {
         if (pokemon.findByPk(req.params.id)) {
             const toBeDeleted = await pokemon.findByPk(req.params.id);
@@ -62,5 +62,24 @@ router.delete("/pokemond/:id", async (req, res, next) => {
 //     }
 // })
 
+router.get("/trainers/", async (req, res, next) => {
+    try {
+        const trainerList = await trainer.findAll();
+        res.send(trainerList);
+    }
+    catch (error) {
+        next(error);
+    }
+})
+
+router.get("/trainers/:id", async (req, res, next) => {
+    try {
+        const singleTrainer = await trainer.findByPk(req.params.id);
+        res.send(singleTrainer);
+    }
+    catch (error) {
+        next(error);
+    }
+})
 
 module.exports = router;
