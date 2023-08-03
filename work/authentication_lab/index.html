@@ -53,12 +53,18 @@
         const attemptTokenLogin = async () => {
           const token = window.localStorage.getItem("token");
           if (token) {
-            const response = await axios.get("/api/auth", {
+            const {data} = await axios.get("/api/auth", {
               headers: {
                 authorization: token,
               },
             });
-            setAuth(response.data);
+            const notes = await axios.get(`/api/users/${data.id}/notes`, {
+              headers: {
+                authorization: token,
+              },
+            });
+            data.notes = notes.data;
+            setAuth(data);
           }
         };
 
@@ -79,6 +85,11 @@
           return (
             <div>
               Welcome {auth.username}
+              <ul>Here are your notes:
+                {auth.notes.map((note) => {
+                  return(<li>{note.text}</li>)
+                })}
+              </ul>
               <button onClick={logout}>Logout</button>
             </div>
           );

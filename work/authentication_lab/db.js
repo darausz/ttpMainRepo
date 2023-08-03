@@ -1,9 +1,12 @@
 const Sequelize = require("sequelize");
+const jwt = require("jsonwebtoken");
 const bcrypt = require("bcrypt");
 const { STRING } = Sequelize;
 const config = {
   logging: false,
 };
+
+const SALT_ROUNDS = 5;
 
 if (process.env.LOGGING) {
   delete config.logging;
@@ -18,10 +21,29 @@ const User = conn.define("user", {
   password: STRING,
 });
 
+const Note = conn.define("note", {
+  text: STRING
+})
+
+User.hasMany(Note);
+Note.belongsTo(User);
+
+User.beforeCreate(async (user) => {
+  user.password = await bcrypt.hash(user.password, SALT_ROUNDS);
+})
+
+User.getNotes = async (id) => {
+  const notes = await Note.findAll({where: {userId: id}});
+  if (notes) {
+    return notes;
+  }
+}
+
 User.byToken = async (token) => {
   try {
-    if (jwt.verify(token)) {
-      const user = await User.findByPk(token);
+    const { userId } = jwt.verify(token, process.env.JWT)
+    if (userId) {
+      const user = await User.findByPk(userId);
       if (user) {
         return user;
       }
@@ -40,11 +62,14 @@ User.authenticate = async ({ username, password }) => {
   const user = await User.findOne({
     where: {
       username,
-      password,
     },
   });
   if (user) {
-    return process.env.JWT.sign({ userId: user.id });
+    const comparison = await bcrypt.compare(password, user.password);
+    if (comparison) {
+      const token = jwt.sign({ userId: user.id }, process.env.JWT);
+      return token;
+    }
   }
   const error = Error("bad credentials");
   error.status = 401;
@@ -61,12 +86,27 @@ const syncAndSeed = async () => {
   const [lucy, moe, larry] = await Promise.all(
     credentials.map((credential) => User.create(credential))
   );
+  const notes = [
+    {text: "good morning"},
+    {text: "have a good day"},
+    {text: "good night"}
+  ];
+  const [note1, note2, note3] = await Promise.all(
+    notes.map((note) => Note.create(note))
+  );
+  await lucy.setNotes([note2, note3]);
+  await moe.setNotes(note1);
   return {
     users: {
       lucy,
       moe,
       larry,
     },
+    notes: {
+      note1,
+      note2,
+      note3,
+    }
   };
 };
 
