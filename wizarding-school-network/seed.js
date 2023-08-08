@@ -1,11 +1,11 @@
-const { db } = require("./server/db");
+const { db, wizardingSchool, student } = require("./server/db");
 const { green, red } = require("chalk");
 
 // require your models here
 
-// DUMMY CAMPUS DATA
+// DUMMY wizardingSchool DATA
 
-const campuses = [
+const wizardingSchools = [
   {
     name: "Hogwarts School of Witchcraft and Wizardry",
     imageUrl: "https://i.ibb.co/30JYJkB/hogwarts.webp",
@@ -74,7 +74,7 @@ const students = [
     email: "hpotter@hogwarts.co.uk",
     imageUrl: "https://i.ibb.co/tPqV51G/harry.webp",
     gpa: 3.5,
-    campusId: 1,
+    wizardingSchoolId: 1,
   },
   {
     firstName: "Ronald",
@@ -82,7 +82,7 @@ const students = [
     email: "rweasley@hogwarts.co.uk",
     imageUrl: "https://i.ibb.co/QmnT5fv/ron.jpg",
     gpa: 2.7,
-    campusId: 1,
+    wizardingSchoolId: 1,
   },
   {
     firstName: "Hermione",
@@ -90,7 +90,7 @@ const students = [
     email: "hgranger@hogwarts.co.uk",
     imageUrl: "https://i.ibb.co/QdVQvYF/hermione-jpg.webp",
     gpa: 4.3,
-    campusId: 1,
+    wizardingSchoolId: 1,
   },
   {
     firstName: "Dean",
@@ -98,7 +98,7 @@ const students = [
     email: "dthomas@hogwarts.co.uk",
     imageUrl: "https://i.ibb.co/Z8wnwds/dean.jpg",
     gpa: 3.8,
-    campusId: 1,
+    wizardingSchoolId: 1,
   },
   {
     firstName: "Padma",
@@ -106,7 +106,7 @@ const students = [
     email: "papatil@hogwarts.co.uk",
     imageUrl: "https://i.ibb.co/5BvhztF/padma.jpg",
     gpa: 3.0,
-    campusId: 1,
+    wizardingSchoolId: 1,
   },
   {
     firstName: "Ginny",
@@ -114,7 +114,7 @@ const students = [
     email: "gweasley@hogwarts.co.uk",
     imageUrl: "https://i.ibb.co/yf6nwqj/ginny.jpg",
     gpa: 3.9,
-    campusId: 1,
+    wizardingSchoolId: 1,
   },
   {
     firstName: "Luna",
@@ -122,7 +122,7 @@ const students = [
     email: "llovegood@hogwarts.co.uk",
     imageUrl: "https://i.ibb.co/mTsjh1W/Luna.webp",
     gpa: 3.9,
-    campusId: 1,
+    wizardingSchoolId: 1,
   },
   {
     firstName: "Viktor",
@@ -130,7 +130,7 @@ const students = [
     email: "vkrum@durmstrang.eu",
     imageUrl: "https://i.ibb.co/c2WNq2D/krum.webp",
     gpa: 2.4,
-    campusId: 3,
+    wizardingSchoolId: 3,
   },
   {
     firstName: "Fluer",
@@ -138,7 +138,7 @@ const students = [
     email: "fleur@beauxbatons.fr",
     imageUrl: "https://i.ibb.co/c2WNq2D/krum.webp",
     gpa: 3.4,
-    campusId: 2,
+    wizardingSchoolId: 2,
   },
 ];
 
@@ -147,14 +147,14 @@ const seed = async () => {
     await db.sync({ force: true });
 
     await Promise.all(
-      campuses.map((campus) => {
-        return Campuses.create(campus);
+      wizardingSchools.map((wizardingSchool) => {
+        return wizardingSchool.create(wizardingSchool);
       })
     );
 
     await Promise.all(
-      students.map((student) => {
-        return Students.create(student);
+      students.map((person) => {
+        return student.create(person);
       })
     );
 

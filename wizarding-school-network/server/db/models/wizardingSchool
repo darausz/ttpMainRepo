@@ -1,5 +1,5 @@
 const db = require("../db");
-const {STRING} = require("sequelize");
+const {STRING, TEXT} = require("sequelize");
 
 const wizardingSchool = db.define("wizarding school", {
   name: {
@@ -11,13 +11,13 @@ const wizardingSchool = db.define("wizarding school", {
     type: STRING,
     defaultValue: ""
   },
-  location: {
+  address: {
     type: STRING,
     allowNull: false,
     allowEmpty: false
   },
-  desription: {
-    type: STRING,
+  description: {
+    type: TEXT,
     allowNull: false,
     allowEmpty: false
   },
