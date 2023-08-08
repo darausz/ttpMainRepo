@@ -1,0 +1,26 @@
+const db = require("../db");
+const {STRING} = require("sequelize");
+
+const wizardingSchool = db.define("wizarding school", {
+  name: {
+    type: STRING,
+    allowNull: false,
+    allowEmpty: false
+  },
+  imageUrl: {
+    type: STRING,
+    defaultValue: ""
+  },
+  location: {
+    type: STRING,
+    allowNull: false,
+    allowEmpty: false
+  },
+  desription: {
+    type: STRING,
+    allowNull: false,
+    allowEmpty: false
+  },
+})
+
+module.exports = wizardingSchool;
