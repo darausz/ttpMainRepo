@@ -1,5 +1,5 @@
 const db = require("../db");
-const {STRING, FLOAT} = require("sequelize");
+const {STRING, FLOAT, INTEGER } = require("sequelize");
 
 const student = db.define("student", {
   firstName: {
@@ -38,6 +38,12 @@ const student = db.define("student", {
           throw Error("invalid magical ability score");
         }
       }
+    }
+  },
+  wizardingSchoolId: {
+    type: INTEGER,
+    references: {
+      key: "wizardingSchoolId"
     }
   }
 })

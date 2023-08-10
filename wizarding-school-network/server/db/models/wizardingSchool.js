@@ -17,9 +17,7 @@ const wizardingSchool = db.define("wizarding school", {
     allowEmpty: false
   },
   description: {
-    type: TEXT,
-    allowNull: false,
-    allowEmpty: false
+    type: TEXT
   },
 })
 

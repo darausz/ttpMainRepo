@@ -9,6 +9,7 @@ import Navbar from "./Navbar";
 import InfoProvider from "./InfoProvider";
 
 const Root = () => {
+
   return (
     <div className="navigation">
       <InfoProvider >
@@ -18,7 +19,7 @@ const Root = () => {
         <Route path="/students" element={<Students />} />
         <Route path="/students/:studentId" element={<Student />} />
         <Route path="/wizarding-schools" element={<Schools />} />
-        <Route path="/wizarding-schools/:wizardingSchoolId" element={<School />} />
+        <Route path="/wizarding-schools/:schoolId" element={<School />} />
       </Routes>
       </InfoProvider>
     </div>

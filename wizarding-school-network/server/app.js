@@ -10,6 +10,7 @@ app.use(express.static(path.join(__dirname, "..", "public")));
 app.use(cors());
 app.use(volleyball);
 
+app.use(express.json());
 app.use("/api", require("./api"));
 
 app.use("*", (req, res) => {

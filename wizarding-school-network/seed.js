@@ -73,7 +73,7 @@ const students = [
     lastName: "Potter",
     email: "hpotter@hogwarts.co.uk",
     imageUrl: "https://i.ibb.co/tPqV51G/harry.webp",
-    gpa: 3.5,
+    magicalAbilityScore: 3.5,
     wizardingSchoolId: 1,
   },
   {
@@ -81,7 +81,7 @@ const students = [
     lastName: "Weasley",
     email: "rweasley@hogwarts.co.uk",
     imageUrl: "https://i.ibb.co/QmnT5fv/ron.jpg",
-    gpa: 2.7,
+    magicalAbilityScore: 2.7,
     wizardingSchoolId: 1,
   },
   {
@@ -89,7 +89,7 @@ const students = [
     lastName: "Granger",
     email: "hgranger@hogwarts.co.uk",
     imageUrl: "https://i.ibb.co/QdVQvYF/hermione-jpg.webp",
-    gpa: 4.3,
+    magicalAbilityScore: 4.3,
     wizardingSchoolId: 1,
   },
   {
@@ -97,7 +97,7 @@ const students = [
     lastName: "Thomas",
     email: "dthomas@hogwarts.co.uk",
     imageUrl: "https://i.ibb.co/Z8wnwds/dean.jpg",
-    gpa: 3.8,
+    magicalAbilityScore: 3.8,
     wizardingSchoolId: 1,
   },
   {
@@ -105,7 +105,7 @@ const students = [
     lastName: "Patil",
     email: "papatil@hogwarts.co.uk",
     imageUrl: "https://i.ibb.co/5BvhztF/padma.jpg",
-    gpa: 3.0,
+    magicalAbilityScore: 3.0,
     wizardingSchoolId: 1,
   },
   {
@@ -113,7 +113,7 @@ const students = [
     lastName: "Weasley",
     email: "gweasley@hogwarts.co.uk",
     imageUrl: "https://i.ibb.co/yf6nwqj/ginny.jpg",
-    gpa: 3.9,
+    magicalAbilityScore: 3.9,
     wizardingSchoolId: 1,
   },
   {
@@ -121,7 +121,7 @@ const students = [
     lastName: "Lovegood",
     email: "llovegood@hogwarts.co.uk",
     imageUrl: "https://i.ibb.co/mTsjh1W/Luna.webp",
-    gpa: 3.9,
+    magicalAbilityScore: 3.9,
     wizardingSchoolId: 1,
   },
   {
@@ -129,7 +129,7 @@ const students = [
     lastName: "Krum",
     email: "vkrum@durmstrang.eu",
     imageUrl: "https://i.ibb.co/c2WNq2D/krum.webp",
-    gpa: 2.4,
+    magicalAbilityScore: 2.4,
     wizardingSchoolId: 3,
   },
   {
@@ -137,7 +137,7 @@ const students = [
     lastName: "Delacour",
     email: "fleur@beauxbatons.fr",
     imageUrl: "https://i.ibb.co/c2WNq2D/krum.webp",
-    gpa: 3.4,
+    magicalAbilityScore: 3.4,
     wizardingSchoolId: 2,
   },
 ];
@@ -147,8 +147,8 @@ const seed = async () => {
     await db.sync({ force: true });
 
     await Promise.all(
-      wizardingSchools.map((wizardingSchool) => {
-        return wizardingSchool.create(wizardingSchool);
+      wizardingSchools.map((school) => {
+        return wizardingSchool.create(school);
       })
     );
 

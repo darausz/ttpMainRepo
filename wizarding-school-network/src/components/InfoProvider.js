@@ -8,16 +8,15 @@ export default function InfoProvider({children}) {
   const [school, setSchool] = useState({});
   const [schools, setSchools] = useState([]);
 
-  useEffect(() => {
-    async function fetchStudents() {
-      const { data: students} = axios.get("/students");
-      setStudents(students);
-      const { data: schools} = axios.get("/wizarding-schools");
-      setSchools(schools);
-    }
-    
-    fetchStudents();
-  }, []);
+  // useEffect(() => {
+  //   async function fetchStudents() {
+  //     const { data: students} = await axios.get("/api/students");
+  //     setStudents(students);
+  //     const { data: schools} = await axios.get("/api/wizarding-schools");
+  //     setSchools(schools);
+  //   }
+  //   fetchStudents();
+  // }, []);
 
   return(
     <InfoContext.Provider value={{
