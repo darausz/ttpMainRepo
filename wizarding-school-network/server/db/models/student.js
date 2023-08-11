@@ -39,12 +39,6 @@ const student = db.define("student", {
         }
       }
     }
-  },
-  wizardingSchoolId: {
-    type: INTEGER,
-    references: {
-      key: "wizardingSchoolId"
-    }
   }
 })
 

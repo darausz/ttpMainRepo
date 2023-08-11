@@ -15,7 +15,7 @@ export default function Schools() {
       setSchools(data);
     }
     getSchools();
-  }, [schools])
+  }, [])
 
   return (
     <div>
