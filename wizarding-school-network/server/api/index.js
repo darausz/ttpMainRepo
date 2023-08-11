@@ -15,12 +15,15 @@ router.get("/wizarding-schools/:schoolId", async (req, res) => {
 })
 
 router.post("/wizarding-schools", async (req, res) => {
-  const existingSchool = await wizardingSchool.findOne({ where: { name: req.body.name } });
-  if (!existingSchool) { 
-    const school = await wizardingSchool.create(req.body); 
-    res.send(school);
-  }
-  res.send(error);
+  try {
+    const existingSchool = await wizardingSchool.findOne({ where: { name: req.body.name } });
+    if (!existingSchool) { 
+      const school = await wizardingSchool.create(req.body); 
+      res.send(school);
+  }}
+  catch (error) {
+  res.send(error)
+  };
 })
 
 router.delete("/wizarding-schools/:schoolId", async (req, res) => {
@@ -49,12 +52,12 @@ router.get("/students/:studentId", async (req, res) => {
 })
 
 router.post("/students", async (req, res) => {
-  const existingStudent = await student.findOne({ where: { name: req.body.name } });
+  const existingStudent = await student.findOne({ where: { firstName: req.body.firstName } });
   if (!existingStudent) {
-    const student = await student.create(req.body);
-    res.send(student);
+    const newStudent = await student.create(req.body);
+    res.send(newStudent);
   }
-  res.send(error);
+  // res.send(error);
 })
 
 router.delete("/students/:studentId", async (req, res) => {

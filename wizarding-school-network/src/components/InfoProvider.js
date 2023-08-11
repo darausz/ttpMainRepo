@@ -18,6 +18,10 @@ export default function InfoProvider({children}) {
   //   fetchStudents();
   // }, []);
 
+  const addSchool = (newSchool) => {
+    setSchools((prevSchools) => [...prevSchools, newSchool]);
+  };
+
   return(
     <InfoContext.Provider value={{
       student,
@@ -27,7 +31,8 @@ export default function InfoProvider({children}) {
       school, 
       setSchool,
       schools, 
-      setSchools
+      setSchools,
+      addSchool
     }}>
       {children}
     </InfoContext.Provider>
