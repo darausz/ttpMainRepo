@@ -17,8 +17,7 @@ export default function StudentInsertForm() {
       const student = await axios.post("/api/students", {firstName, lastName, email, imageUrl, magicalAbilityScore});
       if (student) {
         setInfo("student successfully created");
-        const refreshedStudents = await axios.get("/api/students");
-        setStudents(refreshedStudents);
+        setStudents((prevStudents) => [...prevStudents, student.data]);
       }
       else {
         setInfo("error: invalid parameters");

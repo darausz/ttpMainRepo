@@ -8,8 +8,10 @@ export default function Student() {
 
   useEffect(() => {
     async function getSchool() {
-      const { data } = await axios.get(`/api/wizarding-schools/${student.wizardingSchoolId}`)
-      setSchool(data);
+      if (student.wizardingSchoolId) {
+        const { data } = await axios.get(`/api/wizarding-schools/${student.wizardingSchoolId}`)
+        setSchool(data);
+      }
     }
     getSchool();
   }, [])

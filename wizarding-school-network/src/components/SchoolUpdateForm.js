@@ -3,7 +3,7 @@ import axios from "axios";
 import useInfoContext from "./useInfoContext";
 
 export default function SchoolUpdateForm() {
-  const { setSchools } = useInfoContext();
+  const { setSchools, schools } = useInfoContext();
   const [name, setName] = useState("");
   const [imageUrl, setImageUrl] = useState("");
   const [address, setAddress] = useState("");
@@ -15,9 +15,12 @@ export default function SchoolUpdateForm() {
     try {
       const school = await axios.put("/api/wizarding-schools", {name, imageUrl, address, description});
       if (school) {
-        setInfo("school successfully created");
-        const refreshedSchools = await axios.get("/api/wizarding-schools");
-        setSchools(refreshedSchools);
+        setInfo("school successfully updated");
+        let updatedSchools = [...schools];
+        updatedSchools[school.data.id-1] = school.data;
+        setSchools(updatedSchools);
+        // const refreshedSchools = await axios.get("/api/wizarding-schools");
+        // setSchools(refreshedSchools);
       }
       else {
         setInfo("error: invalid parameters");

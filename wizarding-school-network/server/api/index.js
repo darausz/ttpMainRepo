@@ -17,27 +17,46 @@ router.get("/wizarding-schools/:schoolId", async (req, res) => {
 router.post("/wizarding-schools", async (req, res) => {
   try {
     const existingSchool = await wizardingSchool.findOne({ where: { name: req.body.name } });
-    if (!existingSchool) { 
-      const school = await wizardingSchool.create(req.body); 
+    if (!existingSchool) {
+      const school = await wizardingSchool.create(req.body);
       res.send(school);
-  }}
+    }
+  }
   catch (error) {
-  res.send(error)
+    res.send(error)
   };
 })
 
 router.delete("/wizarding-schools/:schoolId", async (req, res) => {
-  const schoolId = req.params.schoolId;
-  wizardingSchool.destroy({ where: { id: schoolId } });
+  try {
+    const existingSchool = await wizardingSchool.findOne({ where: { id: req.params.schoolId } });
+    if (existingSchool) {
+      // res.send(existingSchool);
+      await existingSchool.destroy();
+      const schools = await wizardingSchool.findAll()
+      res.send(schools);
+    }
+  }
+  catch( error) {
+    res.send(error);
+  }
+  // const schoolId = req.params.schoolId;
+  // wizardingSchool.destroy({ where: { id: schoolId } });
 })
 
 router.put("/wizarding-schools", async (req, res) => {
-  const existingSchool = await wizardingSchool.findOne({ where: { name: req.body.name } });
-  if (existingSchool) {
-    const school = await wizardingSchool.update(req.body, { where: { id: req.params.id } })
-    res.send(school);
+  try {
+    const existingSchool = await wizardingSchool.findOne({ where: { name: req.body.name } });
+    if (existingSchool) {
+      existingSchool.set(req.body);
+      await existingSchool.save();
+      res.send(existingSchool);
+    }
   }
-  res.send(error);
+  catch (error) {
+    res.send(error);
+  }
+
 })
 
 router.get("/students", async (req, res) => {
@@ -52,12 +71,16 @@ router.get("/students/:studentId", async (req, res) => {
 })
 
 router.post("/students", async (req, res) => {
-  const existingStudent = await student.findOne({ where: { firstName: req.body.firstName } });
-  if (!existingStudent) {
-    const newStudent = await student.create(req.body);
-    res.send(newStudent);
+  try {
+    const existingStudent = await student.findOne({ where: { firstName: req.body.firstName } });
+    if (!existingStudent) {
+      const newStudent = await student.create(req.body);
+      res.send(newStudent);
+    }
   }
-  // res.send(error);
+  catch (error) {
+    res.send(error);
+  }
 })
 
 router.delete("/students/:studentId", async (req, res) => {
@@ -66,12 +89,16 @@ router.delete("/students/:studentId", async (req, res) => {
 })
 
 router.put("/students", async (req, res) => {
-  const existingStudent = await student.findOne({ where: { name: req.body.name } });
-  if (existingStudent) {
-    const student = await student.update(req.body, { where: { id: req.params.id } });
-    res.send(student);
+  try {
+    const existingStudent = await student.findOne({ where: { name: req.body.name } });
+    if (existingStudent) {
+      const student = await student.update(req.body, { where: { id: req.params.id } });
+      res.send(student);
+    }
+}
+  catch (error) {
+    res.send(error);
   }
-  res.send(error);
 })
 
 module.exports = router;

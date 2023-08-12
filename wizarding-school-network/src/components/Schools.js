@@ -24,7 +24,7 @@ export default function Schools() {
           <div key={school.id}>
             <Link to={`/wizarding-schools/${school.id}`}>
               <span >
-                {school.name}
+                {school.name} {school.address}
               </span>
             </Link>
             <SchoolRemovalButton schoolId={school.id} />

@@ -23,7 +23,7 @@ export default function School() {
 }, []);
 
 return (
-  <div>{school.name}{
+  <div>{school.name} {school.address}{
     students.map((student) => {
       return (
         <div>
