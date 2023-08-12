@@ -31,10 +31,8 @@ router.delete("/wizarding-schools/:schoolId", async (req, res) => {
   try {
     const existingSchool = await wizardingSchool.findOne({ where: { id: req.params.schoolId } });
     if (existingSchool) {
-      // res.send(existingSchool);
+      res.send(existingSchool);
       await existingSchool.destroy();
-      const schools = await wizardingSchool.findAll()
-      res.send(schools);
     }
   }
   catch( error) {
