@@ -8,8 +8,8 @@ export default function Agents() {
     async function getAgents() {
       const response = await axios.get("https://valorant-api.com/v1/agents");
       setAgents(response.data.data);
-
     }
+
     getAgents();
   }, [])
 
