@@ -31,6 +31,7 @@ router.delete("/wizarding-schools/:schoolId", async (req, res) => {
   try {
     const existingSchool = await wizardingSchool.findOne({ where: { id: req.params.schoolId } });
     if (existingSchool) {
+      res.send(existingSchool);
       await existingSchool.destroy();
     }
   }
@@ -83,6 +84,7 @@ router.delete("/students/:studentId", async (req, res) => {
   try {
     const existingStudent = await student.findOne({ where: { id: studentId } });
     if (existingStudent) {
+      res.send(existingStudent);
       await existingStudent.destroy();
     }
   }
@@ -106,8 +108,9 @@ router.put("/students", async (req, res) => {
 })
 
 router.put("/students/:studentId", async (req, res) => {
+  const studentId = req.params.studentId;
   try {
-    const existingStudent = await student.findOne({ where: { id: req.params.id } });
+    const existingStudent = await student.findOne({ where: { id: studentId } });
     if (existingStudent) {
       existingStudent.set( {
         wizardingSchoolId: null

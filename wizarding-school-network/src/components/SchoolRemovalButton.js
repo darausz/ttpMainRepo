@@ -8,9 +8,12 @@ export default function SchoolRemovalButton({ schoolId }) {
   async function handleClick(event) {
     event.preventDefault();
     try {
-      const {data: deletedSchool} = await axios.delete(`/api/wizarding-schools/${schoolId}`);
+      const {data:deletedSchool} = await axios.delete(`/api/wizarding-schools/${schoolId}`);
       if (deletedSchool) {
-        const updatedSchools = schools.map(current => current.id !== schoolId );
+        const updatedSchools = schools.map((current) => {
+          if (current.id !== deletedSchool.id) {
+            return current
+          } }).filter(Boolean);
         setSchools(updatedSchools);
       }
     }

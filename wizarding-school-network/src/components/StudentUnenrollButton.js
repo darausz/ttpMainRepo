@@ -10,8 +10,7 @@ export default function StudentRemovalButton({ studentId }) {
     try {
       const {data:unenrolledStudent} = await axios.get(`/api/students/${studentId}`);
       if (unenrolledStudent) {
-        const updatedStudent = await axios.put(`/api/students/${studentId}`, {wizardingSchoolId: null})
-        console.log(updatedStudent);
+        const {data:updatedStudent} = await axios.put(`/api/students/${studentId}`, {wizardingSchoolId: null})
         let updatedStudents = students.filter(current => current.id !== updatedStudent.id);
         setStudents(updatedStudents);
       }

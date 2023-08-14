@@ -10,11 +10,11 @@ export default function StudentRemovalButton({ studentId }) {
     try {
       const { data: deletedStudent } = await axios.delete(`/api/students/${studentId}`);
       if (deletedStudent) {
-        let updatedStudents = students.map((current) => {
+        const updatedStudents = students.map((current) => {
           if (current.id !== deletedStudent.id) {
             return current;
           }
-        });
+        }).filter(Boolean);
         setStudents(updatedStudents);
       }
     }
