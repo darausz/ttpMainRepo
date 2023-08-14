@@ -67,7 +67,7 @@ router.get("/students/:studentId", async (req, res) => {
 
 router.post("/students", async (req, res) => {
   try {
-    const existingStudent = await student.findOne({ where: { id: req.body.id } });
+    const existingStudent = await student.findOne({ where: { firstName: req.body.firstName, lastName: req.body.lastName } });
     if (!existingStudent) {
       const newStudent = await student.create(req.body);
       res.send(newStudent);
@@ -80,7 +80,6 @@ router.post("/students", async (req, res) => {
 
 router.delete("/students/:studentId", async (req, res) => {
   const studentId = req.params.studentId;
-  // await student.destroy({ where: { id: studentId } });
   try {
     const existingStudent = await student.findOne({ where: { id: studentId } });
     if (existingStudent) {
