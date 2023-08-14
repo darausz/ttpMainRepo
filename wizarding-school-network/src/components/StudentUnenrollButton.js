@@ -8,13 +8,11 @@ export default function StudentRemovalButton({ studentId }) {
   async function handleClick(event) {
     event.preventDefault();
     try {
-      const { data: deletedStudent } = await axios.delete(`/api/students/${studentId}`);
-      if (deletedStudent) {
-        let updatedStudents = students.map((current) => {
-          if (current.id !== deletedStudent.id) {
-            return current;
-          }
-        });
+      const {data:unenrolledStudent} = await axios.get(`/api/students/${studentId}`);
+      if (unenrolledStudent) {
+        const updatedStudent = await axios.put(`/api/students/${studentId}`, {wizardingSchoolId: null})
+        console.log(updatedStudent);
+        let updatedStudents = students.filter(current => current.id !== updatedStudent.id);
         setStudents(updatedStudents);
       }
     }
@@ -24,6 +22,6 @@ export default function StudentRemovalButton({ studentId }) {
   }
 
   return (
-    <button className="removeButton" onClick={handleClick}>X</button>
+    <button onClick={handleClick}>unenroll</button>
   )
 } 

@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import useInfoContext from "./useInfoContext";
 import { useParams } from "react-router";
 import { Link } from "react-router-dom";
+import StudentUnenrollButton from "./StudentUnenrollButton"
 import axios from "axios";
 
 export default function School() {
@@ -13,28 +14,45 @@ export default function School() {
       const { data } = await axios.get("/api/students");
       setStudents(data.map((student) => {
         if (student.wizardingSchoolId == schoolId) {
-          return(student);
+          return (student);
         }
       }).filter(Boolean));
-      const { data: school} = await axios.get(`/api/wizarding-schools/${schoolId}`);
+      const { data: school } = await axios.get(`/api/wizarding-schools/${schoolId}`);
       setSchool(school);
     }
     updateStudents();
-}, []);
+  }, []);
 
-return (
-  <div>{school.name} {school.address}{
-    students.map((student) => {
-      return (
-        <div>
-          <Link to={`/students/${student.id}`} onClick={() => {setStudent(student)}}>
-              <span >
-                {student.firstName}
-              </span>
-            </Link>
+  return (
+    <div className="smallInfoContainer">
+      <div className="smallInfo" key={school.name}>
+        <div >
+          <Link to={`/wizarding-schools/${school.id}`}>
+            <p>{school.name} </p>
+          </Link>
         </div>
-      )
-    })
-  }</div>
-)
+        <p>{school.address}</p>
+        <img src={school.imageUrl} />
+        <p className="schoolDescription">{school.description}</p>
+      </div>
+      <div className="smallInfoContainer">
+      {students.map((student) => {
+        return (
+          <div className="smallInfo" key={student.id}>
+            <div>
+              <Link to={`/students/${student.id}`} onClick={() => { setStudent(student) }}>
+                <p>{student.firstName} {student.lastName} </p>
+              </Link>
+            </div>
+            <p>{student.email}</p>
+            <img src={student.imageUrl} />
+            <p className="score">Magical Ability Score: {student.magicalAbilityScore}</p>
+            <StudentUnenrollButton studentId={student.id}/>
+          </div>
+        )
+      })
+      }
+      </div>
+    </div>
+  )
 }

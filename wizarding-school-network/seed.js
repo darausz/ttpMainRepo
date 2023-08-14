@@ -136,7 +136,7 @@ const students = [
     firstName: "Fluer",
     lastName: "Delacour",
     email: "fleur@beauxbatons.fr",
-    imageUrl: "https://i.ibb.co/c2WNq2D/krum.webp",
+    imageUrl: "https://i.pinimg.com/originals/68/5c/63/685c632c261d472adecd894ad7c727f8.jpg",
     magicalAbilityScore: 3.4,
     wizardingSchoolId: 2,
   },

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import axios from "axios";
 import useInfoContext from "./useInfoContext";
 
@@ -8,12 +8,14 @@ export default function SchoolRemovalButton({ schoolId }) {
   async function handleClick(event) {
     event.preventDefault();
     try {
-      const deletedSchool = await axios.delete(`/api/wizarding-schools/${schoolId}`);
+      const {data: deletedSchool} = await axios.delete(`/api/wizarding-schools/${schoolId}`);
       if (deletedSchool) {
-        let copyOfSchools = [...schools];
-        let updatedSchools = schools.filter(current => current.id !== deletedSchool.id);
+        let updatedSchools = schools.map((current) => {
+          if (current.id !== deletedSchool.id) {
+            return current;
+          }
+        });
         setSchools(updatedSchools);
-        // setSchools((school) => school.filter((current) => current.name !== deletedSchool.name));
       }
     }
     catch (error) {
@@ -22,7 +24,7 @@ export default function SchoolRemovalButton({ schoolId }) {
   }
 
   return (
-    <button onClick={handleClick}>X</button>
+    <button className="removeButton" onClick={handleClick}>X</button>
   )
 
 }

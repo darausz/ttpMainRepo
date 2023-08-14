@@ -1,6 +1,5 @@
 import React, { useState, useEffect} from "react";
 import InfoContext from "./InfoContext";
-import axios from "axios";
 
 export default function InfoProvider({children}) {
   const [student, setStudent] = useState({});
@@ -17,7 +16,7 @@ export default function InfoProvider({children}) {
       school, 
       setSchool,
       schools, 
-      setSchools
+      setSchools,
     }}>
       {children}
     </InfoContext.Provider>

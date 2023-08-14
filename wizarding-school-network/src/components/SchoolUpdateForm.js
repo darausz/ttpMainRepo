@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import axios from "axios";
 import useInfoContext from "./useInfoContext";
 
@@ -8,38 +8,45 @@ export default function SchoolUpdateForm() {
   const [imageUrl, setImageUrl] = useState("");
   const [address, setAddress] = useState("");
   const [description, setDescription] = useState("");
-  const [info, setInfo] = useState("update a school below");
+  const [info, setInfo] = useState("Update a School");
 
+  useEffect(() => {
+
+  }, [schools])
   async function handleSubmit(event) {
     event.preventDefault();
     try {
-      const school = await axios.put("/api/wizarding-schools", {name, imageUrl, address, description});
+      const {data:school} = await axios.put("/api/wizarding-schools", { name, imageUrl, address, description });
       if (school) {
-        setInfo("school successfully updated");
-        let updatedSchools = [...schools];
-        updatedSchools[school.data.id-1] = school.data;
+        setInfo("School Successfully Updated");
+        const updatedSchools = schools.map((current) => {
+          if (current.name !== school.name) {
+            return current;
+          }
+          else {
+            return school;
+          }
+        })
         setSchools(updatedSchools);
-        // const refreshedSchools = await axios.get("/api/wizarding-schools");
-        // setSchools(refreshedSchools);
       }
       else {
-        setInfo("error: invalid parameters");
+        setInfo("Error: Invalid Parameters");
       }
     }
-    catch(error) {
+    catch (error) {
       throw error;
     }
   }
 
-  return(
+  return (
     <form onSubmit={handleSubmit}>
       <p>{info}</p>
-      <input name="name" value={name} onChange={(e) => setName(e.target.value)}></input>
-      <input name="imageUrl" value={imageUrl} onChange={(e) => setImageUrl(e.target.value)}></input>
-      <input name="address" value={address} onChange={(e) => setAddress(e.target.value)}></input>
-      <input name="description" value={description} onChange={(e) => setDescription(e.target.value)}></input>
-      {/* <input name="" value={} onChange={(e) => setAddress(e.target.value)}></input> */}
-      <button type="submit">Update</button>
+      <hr></hr>
+      <p>Name: </p><input name="name" value={name} onChange={(e) => setName(e.target.value)}></input>
+      <p>Image URL: </p><input name="imageUrl" value={imageUrl} onChange={(e) => setImageUrl(e.target.value)}></input>
+      <p>Address: </p><input name="address" value={address} onChange={(e) => setAddress(e.target.value)}></input>
+      <p>Description: </p><input name="description" value={description} onChange={(e) => setDescription(e.target.value)}></input>
+      <p></p><button type="submit">Update</button>
     </form>
   )
 }

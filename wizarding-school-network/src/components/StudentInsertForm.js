@@ -9,18 +9,18 @@ export default function StudentInsertForm() {
   const [email, setEmail] = useState("");
   const [imageUrl, setImageUrl] = useState("");
   const [magicalAbilityScore, setMagicalAbilityScore] = useState("");
-  const [info, setInfo] = useState("create a new student below");
+  const [info, setInfo] = useState("Create a New Student");
 
   async function handleSubmit(event) {
     event.preventDefault();
     try {
-      const student = await axios.post("/api/students", {firstName, lastName, email, imageUrl, magicalAbilityScore});
+      const {data: student} = await axios.post("/api/students", {firstName, lastName, email, imageUrl, magicalAbilityScore});
       if (student) {
-        setInfo("student successfully created");
-        setStudents((prevStudents) => [...prevStudents, student.data]);
+        setInfo("Student Successfully Created");
+        setStudents((prevStudents) => [...prevStudents, student]);
       }
       else {
-        setInfo("error: invalid parameters");
+        setInfo("Error: Invalid Parameters");
       }
     }
     catch(error) {
@@ -31,13 +31,13 @@ export default function StudentInsertForm() {
   return(
     <form onSubmit={handleSubmit}>
       <p>{info}</p>
-      <input name="first name" value={firstName} onChange={(e) => setFirstName(e.target.value)}></input>
-      <input name="last name" value={lastName} onChange={(e) => setLastName(e.target.value)}></input>
-      <input name="imageUrl" value={imageUrl} onChange={(e) => setImageUrl(e.target.value)}></input>
-      <input name="email" value={email} onChange={(e) => setEmail(e.target.value)}></input>
-      <input name="magical ability score" value={magicalAbilityScore} onChange={(e) => setMagicalAbilityScore(e.target.value)}></input>
-      {/* <input name="" value={} onChange={(e) => setAddress(e.target.value)}></input> */}
-      <button type="submit">Add</button>
+      <hr></hr>
+      <p>First Name: </p><input name="first name" value={firstName} onChange={(e) => setFirstName(e.target.value)}></input>
+      <p>Last Name: </p><input name="last name" value={lastName} onChange={(e) => setLastName(e.target.value)}></input>
+      <p>Image URL: </p><input name="imageUrl" value={imageUrl} onChange={(e) => setImageUrl(e.target.value)}></input>
+      <p>Email: </p><input name="email" value={email} onChange={(e) => setEmail(e.target.value)}></input>
+      <p>Magical Ability Score: </p><input name="magical ability score" value={magicalAbilityScore} onChange={(e) => setMagicalAbilityScore(e.target.value)}></input>
+      <p></p><button type="submit">Add</button>
     </form>
   )
 }

@@ -18,22 +18,30 @@ export default function Students() {
   }, [])
 
   return (
-    <div>{
-      students.map((student) => {
-        return (
-          <div>
-            <Link to={`/students/${student.id}`} onClick={() => { setStudent(student) }}>
-              <span >
-                {student.firstName}
-              </span>
-            </Link>
-            <StudentRemovalButton studentId={student.id}/>
-          </div>
-        )
-      })
-    }
-      <StudentInsertForm />
-      <StudentUpdateForm />
+    <div className="container">
+      <div className="subcontainer">
+        <h1>Students</h1>
+        {students.map((student) => {
+          return (
+            <div className="info" key={student.id}>
+              <div className="removeDiv">
+                <Link to={`/students/${student.id}`} onClick={() => { setStudent(student) }}>
+                  <p>{student.firstName} {student.lastName} </p>
+                </Link>
+                <StudentRemovalButton studentId={student.id} />
+              </div>
+              <p>{student.email}</p>
+              <img src={student.imageUrl} />
+              <p className="schoolsDescription">Magical Ability Score: {student.magicalAbilityScore}</p>
+            </div>
+          )
+        })}
+      </div>
+      <div>
+        <p className="padding"></p>
+        <StudentInsertForm />
+        <StudentUpdateForm />
+      </div>
     </div>
   )
 }

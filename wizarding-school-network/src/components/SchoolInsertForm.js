@@ -8,18 +8,18 @@ export default function SchoolInsertForm() {
   const [imageUrl, setImageUrl] = useState("");
   const [address, setAddress] = useState("");
   const [description, setDescription] = useState("");
-  const [info, setInfo] = useState("create a new school below");
+  const [info, setInfo] = useState("Create a New School");
 
   async function handleSubmit(event) {
     event.preventDefault();
     try {
-      const school = await axios.post("/api/wizarding-schools", {name, imageUrl, address, description});
+      const {data: school} = await axios.post("/api/wizarding-schools", {name, imageUrl, address, description});
       if (school) {
-        setInfo("school successfully created");
-        setSchools((prevSchools) => [...prevSchools, school.data]);
+        setInfo("School Successfully Created");
+        setSchools((prevSchools) => [...prevSchools, school]);
       }
       else {
-        setInfo("error: invalid parameters");
+        setInfo("Error: Invalid Parameters");
       }
     }
     catch(error) {
@@ -30,12 +30,12 @@ export default function SchoolInsertForm() {
   return(
     <form onSubmit={handleSubmit}>
       <p>{info}</p>
-      <input name="name" value={name} onChange={(e) => setName(e.target.value)}></input>
-      <input name="imageUrl" value={imageUrl} onChange={(e) => setImageUrl(e.target.value)}></input>
-      <input name="address" value={address} onChange={(e) => setAddress(e.target.value)}></input>
-      <input name="description" value={description} onChange={(e) => setDescription(e.target.value)}></input>
-      {/* <input name="" value={} onChange={(e) => setAddress(e.target.value)}></input> */}
-      <button type="submit">Add</button>
+      <hr></hr>
+      <p>Name: </p><input name="name" value={name} onChange={(e) => setName(e.target.value)}></input>
+      <p>Image URL: </p><input name="imageUrl" value={imageUrl} onChange={(e) => setImageUrl(e.target.value)}></input>
+      <p>Address: </p><input name="address" value={address} onChange={(e) => setAddress(e.target.value)}></input>
+      <p>Description: </p><input name="description" value={description} onChange={(e) => setDescription(e.target.value)}></input>
+      <p></p><button type="submit">Add</button>
     </form>
   )
 }
