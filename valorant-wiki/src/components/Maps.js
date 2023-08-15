@@ -49,8 +49,8 @@ export default function Maps() {
   }
 
   return (<div className="imgContainer" ref={ref} >
-    <p className="leftScroll" onClick={scrollLeft}> &#60; </p>
-    <p className="rightScroll" onClick={scrollRight}> &#62;</p>
+    <div className="leftScroll" onClick={scrollLeft}> &#60; </div>
+    <div className="rightScroll" onClick={scrollRight}> &#62;</div>
     {maps.map((current) => {
       return (
         <div className="mapContainer" >

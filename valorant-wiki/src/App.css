@@ -149,13 +149,13 @@ position:relative
 }
 
 .leftScroll {
-  position: fixed;
+  position: absolute;
   font-size: 10rem;
   left:0;
 }
 
 .rightScroll {
-  position:fixed;
+  position: absolute;
   font-size: 10rem;
   right: 0;
 }
