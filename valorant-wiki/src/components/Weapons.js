@@ -19,7 +19,7 @@ export default function Weapons() {
         return(
           <div>
             {weapon.displayName}
-            <img src={weapon.displayIcon} alt="error" />
+            <img className="weapon" src={weapon.displayIcon} alt="error" />
           </div>
         )
       })}

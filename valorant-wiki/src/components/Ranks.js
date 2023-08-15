@@ -17,7 +17,7 @@ export default function Ranks () {
     ranks.map((rank) => {
       return(
         <div>
-          <img src={rank.smallIcon} alt="error"/> {rank.tierName}
+          <img className="icon" src={rank.smallIcon} alt="error"/> {rank.tierName}
         </div>
       )
     })
