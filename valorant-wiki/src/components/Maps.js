@@ -4,6 +4,8 @@ import axios from "axios";
 export default function Maps() {
   const [maps, setMaps] = useState([]);
   const ref = useRef(null);
+
+
   useEffect(() => {
     async function getMaps() {
       const response = await axios.get("https://valorant-api.com/v1/maps");
@@ -26,7 +28,6 @@ export default function Maps() {
   function scrollLeft() {
     const maxScroll = (ref.current.scrollWidth + ref.current.clientWidth);
     const oneScroll = maxScroll / maps.length - ref.current.clientWidth / maps.length
-    console.log(maxScroll, oneScroll)
     if (ref.current.scrollLeft - .5 * oneScroll < 0) {
       ref.current.scrollLeft = maxScroll - oneScroll;
     }
@@ -44,31 +45,25 @@ export default function Maps() {
     else {
       ref.current.scrollLeft += oneScroll + 0.3;
       console.log(maxScroll, oneScroll, ref.current.scrollLeft)
-
     }
   }
 
-  return (<div className="imgContainer" ref={ref} >
-    <div className="leftScroll" onClick={scrollLeft}> &#60; </div>
-    <div className="rightScroll" onClick={scrollRight}> &#62;</div>
-    {maps.map((current) => {
-      return (
-        <div className="mapContainer" >
-          <p className="mapDescription" >{current.displayName}</p>
-          <img className="mapImg" src={current.splash} alt="error" />
+  return (
+    <div className="imgContainer" ref={ref}>
+      <div className="leftScroll" onClick={scrollLeft}>
+        &#60;
+      </div>
+      {maps.map((current) => (
+        <div className="mapContainer" key={current.displayName}>
+          <div className="mapImageWrapper">
+            <img className="mapImg" src={current.splash} alt="error" />
+            <p className="mapDescription">{current.displayName}</p>
+          </div>
         </div>
-      )
-    })}
-  </div>
-  )
-  // return(
-  //   <ScrollMenu 
-  //     arrowLeft={<div className="leftScroll"> &#60; </div>}
-  //     arrowRight={<p className="rightScroll"> &#62; </p>}
-  //     data={maps.map((current, index) => (
-  //             <img itemId={index} className="mapImg" src={current.splash} alt="error" />
-
-  //         ))}
-  //   />
-  // )
+      ))}
+      <div className="rightScroll" onClick={scrollRight}>
+        &#62;
+      </div>
+      </div>
+  );
 }

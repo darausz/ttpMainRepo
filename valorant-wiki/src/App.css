@@ -1,5 +1,6 @@
 body {
-  background-color:rgb(47, 255, 186);
+  background-color: rgb(47, 255, 186);
+  /* background-color: RGB(242, 99, 107); */
 }
 
 .nav {
@@ -14,11 +15,12 @@ body {
 
 .navImg {
   position: absolute;
-  left:0;
-  top:0;
-  width:6rem;
+  left: 0;
+  top: 0;
+  width: 6rem;
   height: 6rem;
 }
+
 .navItem {
   font-size: 2rem;
   text-decoration: none;
@@ -45,7 +47,8 @@ hr {
 
 .agentsOuterContainer {
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
+  overflow: hidden;
 }
 
 .agentsInnerContainer {
@@ -53,7 +56,10 @@ hr {
   display: flex;
   flex-direction: row;
   align-items: center;
-  margin:5rem;
+  flex-shrink: 0;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
 }
 
 .agentsInfoContainer {
@@ -69,24 +75,27 @@ hr {
 
 .agentName {
   position: absolute;
-  top: 4rem;
-  left: 2rem;
+  top: 0rem;
+  left: 15rem;
   font-size: 3rem;
 }
 
 .agentRole {
   position: absolute;
-  top: 10rem;
-  left: 2rem;
+  top: 6rem;
+  left: 15rem;
 }
 
 .agentDescription {
   padding-left: 3rem;
   padding-right: 3rem;
   text-align: center;
+  transform: translateX(30%);
+  width: 60%;
 }
 
 .agentImg {
+  padding-left: 10rem;
   height: 45rem;
   width: 50rem;
 }
@@ -103,8 +112,10 @@ hr {
 }
 
 .abilityDescription {
-  width: 100%;
+  width: 80%;
+  padding-right: 10rem;
   box-sizing: border-box;
+  text-align: justify;
 }
 
 .blankImg {
@@ -122,40 +133,130 @@ hr {
   overflow-x: auto;
   align-items: stretch;
   align-content: stretch;
-  /* overflow:hidden; */
+  overflow:hidden;
 }
 
 .mapContainer {
-  /* position: relative; */
   flex-shrink: 0;
-  height:100vh;
+  height: 100vh;
   overflow: hidden;
 }
 
-.mapImg {
-  padding: 0.5rem 5.7rem 0.5rem;
-  width: 98.5%;
-  height: 98.5%;
+.mapImageWrapper {
+  position: relative;
+  display: inline-block;
 }
 
-.mapOutDescription {
-position:relative
-}
 .mapDescription {
-  position:absolute;
-  top:0;
-  left: 10rem;
+  margin: 0;
+  position: absolute;
+  top: 4rem;
+  left: 6rem;
+  color: white;
+  padding: 0.5rem;
+  font-size: 1.5rem;
+  width: 100%;
+  box-sizing: border-box;
+  text-align:left;
+  text-shadow: 0px 0px 2px rgb(235, 178, 178);
+  pointer-events: none;
+  z-index: 1;
+  font-size: 8rem;
+  font-weight: 100;
+  font-family: 'Arial Narrow', Arial, sans-serif
+}
 
+.mapImg {
+  width: 100vw;
+  height: auto;
+  vertical-align: top;
+}
+
+.leftScroll, .rightScroll {
+  position: absolute;
+  font-family:monospace;
+  font-size: 10rem;
+  z-index: 2;
+  top:50vh;
+  color: white
 }
 
 .leftScroll {
-  position: absolute;
-  font-size: 10rem;
-  left:0;
+  left: 0;
+  
 }
 
 .rightScroll {
-  position: absolute;
-  font-size: 10rem;
   right: 0;
 }
+
+.ranksContainer {
+  margin-top: 2.5rem;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+.divisionsContainer {
+  height: 13rem;
+  min-width: 30%;
+  margin: auto;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  text-align: center;
+  justify-content: center;
+}
+
+.tierName {
+  height: 2rem;
+  width: 100%;
+}
+
+.break {
+  flex-basis: 100%;
+  height: 0;
+}
+
+.tierContainer {
+  display: flex;
+  flex-direction: row;
+}
+
+.singleContainer {
+  display: flex;
+  flex-direction: column;
+}
+
+.singleContainer p {
+  height: 1rem;
+  width: 100%;
+}
+
+#tierImg0 {
+  flex: 3 0 100%;
+  margin-bottom: -1rem;
+}
+
+#tierImg1 {
+  flex: 2 0 30%;
+  align-self: flex-start;
+  padding-left: 15rem;
+
+}
+
+#tierImg2 {
+  flex: 2 0 30%;
+  align-self: flex-start;
+  padding-right: 15rem;
+}
+
+.tierImg {
+  width: 7rem;
+  height: 7rem;
+}
+
+/* .tierPadding {
+  padding-bottom: 2rem;
+} */

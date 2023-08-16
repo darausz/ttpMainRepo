@@ -1,22 +1,34 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import axios from "axios";
 
-export default function Agents() {
+export default function Agents({scrollLeft, scrollRight}) {
   const [agents, setAgents] = useState([]);
+  const ref = useRef(null);
 
   useEffect(() => {
     async function getAgents() {
       const response = await axios.get("https://valorant-api.com/v1/agents");
-      setAgents(response.data.data);
+      const updatedAgents = response.data.data.map((agent) => {
+        if (agent.isPlayableCharacter) {
+          return(agent);
+        }
+        else {
+          return(null);
+        }
+      }).filter(Boolean);
+      setAgents(updatedAgents);
     }
 
     getAgents();
   }, [])
 
   return (
-    <div className="agentsOuterContainer">
+    <div className="agentsOuterContainer" ref={ref}>
+      <div className="leftScroll" onClick={() => scrollLeft(ref, agents)}>
+        &#60;
+      </div>
       {agents.map((agent) => {
-        return agent.isPlayableCharacter ? (
+        return(
           <>
             <div className="agentsInnerContainer">
               <div className="agents">
@@ -26,31 +38,26 @@ export default function Agents() {
                 <p className="agentDescription"> {agent.description} </p>
               </div>
               <div className="abilityContainer">
-                {agent.abilities.map((ability) => {
-                  return ability.displayIcon ?
+                {agent.abilities.map((ability) => 
                     (<div className="agentsInfoContainer">
                       <img className="abilityIcon" src={ability.displayIcon} alt="Ability Icon Not Found" />
-                      <span>
-                        <p className="abilityDescription"> {ability.displayName}</p>
+                      <span className="abilityDescription">
+                        <p> {ability.displayName}</p>
                         <p>{ability.description}</p>
                       </span>
                     </div>)
-                    :
-                    (<div className="agentsInfoContainer">
-                      <div className="blankImg"></div>
-                      <p>
-                        <p className="abilityDescription"> {ability.displayName}</p>
-                        <p>{ability.description}</p>
-                      </p>
-                    </div>)
-                })}
+
+                )}
               </div>
             </div>
             <hr/>
           </>
-        ) : (<></>)
+        )
       }
       ).filter(Boolean)}
+      <div className="rightScroll" onClick={() => scrollRight(ref, agents)}>
+        &#62;
+      </div>
     </div>
   )
 }
