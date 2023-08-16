@@ -1,7 +1,9 @@
 import React, { useState, useEffect, useRef } from "react";
+import scrollLeft from "./functions/scrollLeft";
+import scrollRight from "./functions/scrollRight";
 import axios from "axios";
 
-export default function Agents({scrollLeft, scrollRight}) {
+export default function Agents() {
   const [agents, setAgents] = useState([]);
   const ref = useRef(null);
 
@@ -46,7 +48,6 @@ export default function Agents({scrollLeft, scrollRight}) {
                         <p>{ability.description}</p>
                       </span>
                     </div>)
-
                 )}
               </div>
             </div>

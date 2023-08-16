@@ -32,13 +32,14 @@ export default function Ranks() {
     }
     return " "
   }
-  return (
+  return (<>
+    <h1>Competitive Tiers</h1>
     <div className="ranksContainer">
       {ranks.map((rank, index) => {
         return (
           <div className="divisionsContainer" id={`tierImg` + index}>
-            <div className="tierName">{rank[0].divisionName}</div> 
-            <div className="tierContainer">
+            <h2 className="tierName" id={`tierName` + index}><br/>{rank[0].divisionName}</h2> 
+            <div className="tierContainer" id={`tierContainer` + index}>
               {rank.map((tier) => {
                 return (
                   <div className="singleContainer">
@@ -52,5 +53,6 @@ export default function Ranks() {
           </div>)
       })}
     </div>
+    </>
   )
 }

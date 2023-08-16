@@ -1,4 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
+import scrollLeft from "./functions/scrollLeft";
+import scrollRight from "./functions/scrollRight";
 import axios from "axios";
 
 export default function Maps() {
@@ -9,9 +11,8 @@ export default function Maps() {
   useEffect(() => {
     async function getMaps() {
       const response = await axios.get("https://valorant-api.com/v1/maps");
-      let copyOfData = response.data.data;
       const sortedResponse = [];
-      copyOfData.forEach((item) => {
+      response.data.data.forEach((item) => {
         if (item.coordinates !== null && item.displayName !== "The Range") {
           sortedResponse.unshift(item);
         }
@@ -25,32 +26,9 @@ export default function Maps() {
     getMaps();
   }, [])
 
-  function scrollLeft() {
-    const maxScroll = (ref.current.scrollWidth + ref.current.clientWidth);
-    const oneScroll = maxScroll / maps.length - ref.current.clientWidth / maps.length
-    if (ref.current.scrollLeft - .5 * oneScroll < 0) {
-      ref.current.scrollLeft = maxScroll - oneScroll;
-    }
-    else {
-      ref.current.scrollLeft -= oneScroll - 0.3;
-    }
-  }
-
-  function scrollRight() {
-    const maxScroll = (ref.current.scrollWidth + ref.current.clientWidth);
-    const oneScroll = Math.ceil(maxScroll / maps.length - (ref.current.clientWidth) / (maps.length))
-    if (ref.current.scrollLeft + 2.1 * oneScroll > maxScroll) {
-      ref.current.scrollLeft = 0;
-    }
-    else {
-      ref.current.scrollLeft += oneScroll + 0.3;
-      console.log(maxScroll, oneScroll, ref.current.scrollLeft)
-    }
-  }
-
   return (
     <div className="imgContainer" ref={ref}>
-      <div className="leftScroll" onClick={scrollLeft}>
+      <div className="leftScroll" onClick={() => scrollLeft(ref, maps)}>
         &#60;
       </div>
       {maps.map((current) => (
@@ -61,7 +39,7 @@ export default function Maps() {
           </div>
         </div>
       ))}
-      <div className="rightScroll" onClick={scrollRight}>
+      <div className="rightScroll" onClick={() => scrollRight(ref, maps)}>
         &#62;
       </div>
       </div>
