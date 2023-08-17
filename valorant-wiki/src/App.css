@@ -403,5 +403,6 @@ hr {
   font-weight: bold;
 }
 #knife {
+  font-weight: bold;
   transform: translateX(25%);
 }
