@@ -4,6 +4,7 @@ body {
   font-size: 1.2rem;
   font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
   color: rgb(83, 33, 43);
+  
 }
 
 h1 {
@@ -133,8 +134,8 @@ hr {
 }
 
 .abilityContainer {
-  padding-top: 7rem;
   align-self: flex-start;
+  align-self: center;
 }
 
 .abilityIcon {

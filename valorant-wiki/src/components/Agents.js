@@ -41,13 +41,19 @@ export default function Agents() {
               </div>
               <div className="abilityContainer">
                 {agent.abilities.map((ability) => 
-                    (<div className="agentsInfoContainer">
+                ((ability.displayIcon) ? (<div className="agentsInfoContainer">
                       <img className="abilityIcon" src={ability.displayIcon} alt="Ability Icon Not Found" />
                       <span className="abilityDescription">
                         <p className="abilityName"> {ability.displayName}</p>
                         <p>{ability.description}</p>
                       </span>
-                    </div>)
+                    </div>) : (<div className="agentsInfoContainer">
+                      <div className="blankImg"></div>
+                      <span className="abilityDescription">
+                        <p className="abilityName"> {ability.displayName}</p>
+                        <p>{ability.description}</p>
+                      </span>
+                    </div>))
                 )}
               </div>
             </div>
