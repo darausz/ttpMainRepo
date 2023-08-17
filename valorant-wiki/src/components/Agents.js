@@ -44,7 +44,7 @@ export default function Agents() {
                     (<div className="agentsInfoContainer">
                       <img className="abilityIcon" src={ability.displayIcon} alt="Ability Icon Not Found" />
                       <span className="abilityDescription">
-                        <p> {ability.displayName}</p>
+                        <p className="abilityName"> {ability.displayName}</p>
                         <p>{ability.description}</p>
                       </span>
                     </div>)

@@ -76,6 +76,7 @@ hr {
 }
 
 .agentsOuterContainer {
+  scroll-behavior: smooth;
   display: flex;
   flex-direction: row;
   overflow: hidden;
@@ -112,8 +113,9 @@ hr {
 
 .agentRole {
   position: absolute;
-  top: 6rem;
-  left: 15rem;
+  font-size: 1.5rem;
+  top: 5rem;
+  left: 15.1rem;
 }
 
 .agentDescription {
@@ -148,6 +150,10 @@ hr {
   text-align: justify;
 }
 
+.abilityName {
+  font-size: 1.3rem;
+  font-weight: bold;
+}
 .blankImg {
   box-sizing: border-box;
   min-width: 9rem;
